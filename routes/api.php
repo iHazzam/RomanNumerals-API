@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::group(['namespace' => 'Api', 'as' => 'api.', 'middleware' => 'api'], function () {
+    Route::post('/convert','ConversionsController@store')->name('api.convert');
+    Route::get('/conversions/recent','ConversionsController@recent')->name('api.recent');
+    Route::get('/conversions/popular','ConversionsController@popular')->name('api.popular');
+});
