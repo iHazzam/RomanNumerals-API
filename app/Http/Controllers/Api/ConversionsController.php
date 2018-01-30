@@ -25,7 +25,7 @@ class ConversionsController extends Controller
     {
         $integer_conversion = new IntegerConversion();
         $val = $integer_conversion->toRomanNumerals($request->integer);
-        if($val == null)
+        if($val === null)
         {
             return response()->json([
                 'error' => [
@@ -33,7 +33,7 @@ class ConversionsController extends Controller
                 ]
             ], 404);
         }
-        $conversion = Conversion::where('integer_value',$request->integer)->firstOrCreate(['integer_value' => $request->integer,'roman_numeral_value' => $val,'count' => 0,'created_at'=>Carbon::now()]); //not updateOrCreate as you can't increment in it
+        $conversion = Conversion::firstOrCreate(['integer_value' => $request->integer],['roman_numeral_value' => $val,'count' => 0,'created_at'=>Carbon::now()]); //not updateOrCreate as you can't increment in it
         $conversion->count = $conversion->count + 1; //increment the count
         $conversion->save();//and re-save it
         return fractal($conversion,new ConversionTransformer())->respond();
@@ -47,7 +47,7 @@ class ConversionsController extends Controller
     {
         $paginator = Conversion::where('created_at','>=',Carbon::now()->subDay())->orderBy('created_at','desc')->paginate(15);
         $recent = $paginator->getCollection(); //seperate collection and pagination to feed paginator
-        return Fractal::create()->collection($recent, new ConversionTransformer())->serializeWith(new JsonApiSerializer())->paginateWith(new IlluminatePaginatorAdapter($paginator))->toJson();
+        return Fractal::create()->collection($recent, new ConversionTransformer())->serializeWith(new JsonApiSerializer())->paginateWith(new IlluminatePaginatorAdapter($paginator))->respond();
     }
 
 
@@ -57,7 +57,7 @@ class ConversionsController extends Controller
      */
     public function popular()
     {
-        $popular = Conversion::orderBy('count')->limit(10)->get();
+        $popular = Conversion::orderBy('count','desc')->limit(10)->get();
         return fractal($popular, new ConversionTransformer())->respond();
     }
 }
