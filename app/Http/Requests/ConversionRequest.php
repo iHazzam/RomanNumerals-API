@@ -24,7 +24,7 @@ class ConversionRequest extends FormRequest
     public function rules()
     {
         return [
-            'integer' => 'required|integer'
+            'integer' => 'required|integer|min:1|max:3999'
         ];
     }
 }
