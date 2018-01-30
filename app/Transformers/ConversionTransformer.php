@@ -19,6 +19,7 @@ class ConversionTransformer extends TransformerAbstract
             'id' => $conversion->id,
             'decimal' => $conversion->integer_value,
             'roman' => $conversion->roman_numeral_value,
+            'count' => $conversion->count,
             'created' => Carbon::parse($conversion->created_at->diffForHumans())
         ];
     }
