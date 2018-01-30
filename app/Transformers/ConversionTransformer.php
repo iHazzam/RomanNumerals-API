@@ -20,7 +20,8 @@ class ConversionTransformer extends TransformerAbstract
             'decimal' => $conversion->integer_value,
             'roman' => $conversion->roman_numeral_value,
             'count' => $conversion->count,
-            'created' => Carbon::parse($conversion->created_at->diffForHumans())
+            'first_converted' => $conversion->created_at,
+            'most_recently_converted' => $conversion->updated_at
         ];
     }
 }
