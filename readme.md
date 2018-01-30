@@ -1,5 +1,10 @@
 # Roman Numerals API Task
-This development task is based on the Roman Numeral code kata which may have already been completed during this recruitment process. This task requires you to build a JSON API and so any HTML, CSS or JavaScript that is submitted will not be reviewed.
+This is Harry Messenger's implementation of the Netsells API task
+[Postman Docs](https://documenter.getpostman.com/view/3627784/netsells-programming-task/7TQ9Ait) 
+
+ Please note: The project was (quickly) updated to Laravel 5.5 to work with the latest version of Laravel Fractal
+ 
+ Any questions, please feel free to contact me!
  
 ## Brief
 Our client (Numeral McNumberFace) requires a simple API which will convert an integer to its roman numeral counterpart. After our discussions with the client, we have discovered that the solution will contain 3 API endpoints, and will only support integers ranging from 1 to 3999. The client wishes to keep track of conversions so they can determine which is the most frequently converted integer, and the last time this was converted.
